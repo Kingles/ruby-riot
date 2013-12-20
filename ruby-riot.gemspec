@@ -4,8 +4,8 @@ require File.expand_path('../lib/ruby-riot/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Kingles"]
   gem.email         = ["kerosuppi@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{A lightweight wrapper/caching system for riot games' API}
+  gem.summary       = %q{Ruby wrapper for Riot Games' API}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
