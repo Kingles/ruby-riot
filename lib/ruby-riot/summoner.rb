@@ -9,6 +9,10 @@ module RubyRiot
 
 		def initialize(id)
 			@res = get_id id
+			setprops
+		end
+
+		def setprops
 			@name = @res['name']
 			@id = @res['id']
 			@level = @res['summonerLevel']
@@ -19,6 +23,7 @@ module RubyRiot
 
 		def force
 			@res = get_id id,true
+			setprops
 		end
 
 		def get_from_db(id)
