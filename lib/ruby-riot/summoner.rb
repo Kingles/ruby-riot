@@ -2,28 +2,34 @@ require 'debugger'
 
 module RubyRiot
 	class Summoner < APIModel
-		attr_reader :id, :name, :level
-		VERSION = "v1.1"
+		attr_reader :id, :name, :level, :profile_icon_id
+		VERSION = 'v1.2'
 		ID = 'summoner'
 		set_base_uri VERSION, ID
 
 		def initialize(id)
 			@res = get_id id
-			@name = @res["summonerName"]
-			@id = @res["id"]
-			@level = @res["summonerLevel"]
+			@name = @res['name']
+			@id = @res['id']
+			@level = @res['summonerLevel']
+			@profile_icon_id = @res['profileIconId']
+			@res['accessDate'] = Date.today
 			DB.set! @id, @res
+		end
+
+		def force
+			@res = get_id id,true
 		end
 
 		def get_from_db(id)
 			
 		end
 
-		def get_id(id)
-			if id.class == String
-				DB.select{|key,val| val["summonerName"] == id && ((val['summonerLevel'] == 30 || Time.at(val['revisionDate']/1000) < REFRESH_DATE))  }.first || self.class.by_name(id).to_hash
-			elsif id.class == Fixnum || id.to_i != 0 
-				DB.select{|key,val| val["id"] == id}.first || self.class.by_id(id).to_hash
+		def get_id(id, force=nil)
+			if id.class == Fixnum || id.to_i != 0 
+				force ? self.class.by_id(id.to_i).to_hash : DB.select{|key,val| val['id'] == id.to_i && ((val['summonerLevel'] == 30 || Time.at(val['accessDate']/1000) < RubyRiot::REFRESH_DATE)) }[0][1] || self.class.by_id(id.to_i).to_hash
+			elsif id.class == String
+				force ? self.class.by_name(id).to_hash : DB.select{|key,val| val['name'] =~ /#{id}/i && ((val['summonerLevel'] == 30 || Time.at(val['revisionDate']/1000) < RubyRiot::REFRESH_DATE || Time.at(val['revisionDate']/1000) < RubyRiot::LONG_REFRESH_DATE))  }[0][1] || self.class.by_name(id).to_hash
 			else
 				fail "invalid identifier. Please supply an ID or summoner name"
 			end
@@ -34,7 +40,7 @@ module RubyRiot
 		end
 
 		def self.by_id(id)
-			get(id)
+			get('/' + id.to_s)
 		end
 
 		def get_names_by_ids(ids=[])
@@ -62,7 +68,7 @@ module RubyRiot
 		end
 
 		def self.get(o)
-			super(o+"?api_key=#{RubyRiot::API_KEY}")
+			super(o.to_s+"?api_key=#{RubyRiot::API_KEY}")
 		end
 
 	end

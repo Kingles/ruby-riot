@@ -11,10 +11,11 @@ require "httparty"
 
 module RubyRiot
 	REGION = 'na'
-	API_KEY = 'YOUR API KEY'
+	API_KEY = 'YOUR_API_KEY'
 	BASE_URI = "http://prod.api.pvp.net/api/lol/#{REGION}/" #not ssl for now..
 	DB = ::Daybreak::DB.new "../db/ruby-riot.db"
 	REFRESH_DATE = (Date.today - 7).to_time
+	LONG_REFRESH_DATE = (Date.today - 30).to_time
 end
 
 require File.dirname(__FILE__) + '/ruby-riot/apimodel.rb'
