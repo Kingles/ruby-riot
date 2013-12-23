@@ -1,5 +1,4 @@
 require 'debugger'
-require ''
 
 module RubyRiot
 	class Summoner < APIModel
