@@ -17,6 +17,7 @@ module RubyRiot
 	REFRESH_DATE = (Date.today - 7).to_time
 end
 
+require File.dirname(__FILE__) + '/ruby-riot/apimodel.rb'
 Dir[File.dirname(__FILE__) + '/ruby-riot/*.rb'].each do |file|
   require file
 end
