@@ -1,4 +1,5 @@
 require_relative '../../spec_helper'
+require 'debugger'
  
 describe RubyRiot::Summoner do
   it "must work" do
@@ -8,7 +9,7 @@ describe RubyRiot::Summoner do
 end
 
 describe "GET summoner by name" do
- 
+  debugger 
   before do
     VCR.insert_cassette 'summoner', :record => :new_episodes
   end
@@ -18,7 +19,7 @@ describe "GET summoner by name" do
   end
  
   it "records the fixture" do
-    Dish::Player.get("/summoner/by-name/kingles?api_key=#{RubyRiot::API_KEY}")
+    RubyRiot::Summoner.get("/by-name/kingles?api_key=#{RubyRiot::API_KEY}")
   end
  
 end

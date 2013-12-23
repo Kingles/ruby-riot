@@ -8,4 +8,5 @@ group :test do
   gem 'vcr'
   gem 'turn'
   gem 'rake'
+  gem 'debugger'
 end

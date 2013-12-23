@@ -1,0 +1,89 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://prod.api.pvp.net/api/lol/na/v1.1/summoner/by-name/kingles?api_key=064bda43-a64d-4323-b207-cbc92e14883a
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Access-Control-Allow-Methods:
+      - GET, POST, DELETE, PUT
+      Access-Control-Allow-Origin:
+      - ! '*'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Mon, 23 Dec 2013 18:56:02 GMT
+      Server:
+      - Jetty(9.1.0.v20131115)
+      X-Newrelic-App-Data:
+      - PxQFWFFSDwQTVVdUBAgAVkYdFGQHBDcQUQxLA1tMXV1dORYzVBJHNQFUZAQUFVFQVThOA0dYa0kIXlpvTR0RB1cLVwxFZBtEAksIPR4SRg8JWVkEFD8XUUlJDwNaVGtJH19XXgcbQ0p3J2xLGhQEHANJCU8BUQdTVAQOVFNPFQIcRlZQAQdRAAAHUApaUgVXAlMaPw==
+      Content-Length:
+      - '144'
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: ! '{"id":19231455,"name":"Kingles","profileIconId":518,"summonerLevel":30,"revisionDate":1387756920000,"revisionDateStr":"12/23/2013
+        12:02 AM UTC"}'
+    http_version: 
+  recorded_at: Mon, 23 Dec 2013 18:54:47 GMT
+- request:
+    method: get
+    uri: http://prod.api.pvp.net/api/lol/nav1.1/summoner/by-name/kingles?api_key=064bda43-a64d-4323-b207-cbc92e14883a
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json;charset=UTF-8
+      Server:
+      - Jetty(9.1.0.v20131115)
+      Content-Length:
+      - '60'
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: ! '{"status": {"message": "Access denied", "status_code": 401}}'
+    http_version: 
+  recorded_at: Mon, 23 Dec 2013 19:17:29 GMT
+- request:
+    method: get
+    uri: http://prod.api.pvp.net/api/lol/na/by-name/kingles?api_key=064bda43-a64d-4323-b207-cbc92e14883a
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Content-Type:
+      - application/json;charset=UTF-8
+      Server:
+      - Jetty(9.1.0.v20131115)
+      Content-Length:
+      - '60'
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: ! '{"status": {"message": "Access denied", "status_code": 401}}'
+    http_version: 
+  recorded_at: Mon, 23 Dec 2013 19:27:39 GMT
+recorded_with: VCR 2.8.0

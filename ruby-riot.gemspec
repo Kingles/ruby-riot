@@ -15,6 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Ruby::Riot::VERSION
   gem.add_runtime_dependency 'httparty'
+  gem.add_runtime_dependency 'daybreak'
  
 
 end
