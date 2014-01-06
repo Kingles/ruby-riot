@@ -1,4 +1,4 @@
-module RubyRiot
+	module RubyRiot
 	class Stats < APIModel
 		VERSION = "v1.2"
 		ID = 'stats'

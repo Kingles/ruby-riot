@@ -1,7 +1,7 @@
 module RubyRiot
 	class APIModel
 		include HTTParty
-		base_uri RubyRiot::BASE_URI
+		base_uri RubyRiot::base_uri
 
 		def self.set_base_uri(v,i)
 			base_uri base_uri + '/' + v + '/' + i

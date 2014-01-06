@@ -32,12 +32,16 @@ module RubyRiot
 
 		def get_id(id, force=nil)
 			if id.class == Fixnum || id.to_i != 0 
-				force ? self.class.by_id(id.to_i).to_hash : DB.select{|key,val| val['id'] == id.to_i && ((val['summonerLevel'] == 30 || Time.at(val['accessDate']/1000) < RubyRiot::REFRESH_DATE)) }[0][1] || self.class.by_id(id.to_i).to_hash
+				force ? self.class.by_id(id.to_i).to_hash : DB.select{|key,val| val['id'] == id.to_i && ((val['summonerLevel'] == 30 || Time.at(val['accessDate']/1000) < RubyRiot::refresh_date)) }[0][1] || self.class.by_id(id.to_i).to_hash
 			elsif id.class == String
-				force ? self.class.by_name(id).to_hash : DB.select{|key,val| val['name'] =~ /#{id}/i && ((val['summonerLevel'] == 30 || Time.at(val['revisionDate']/1000) < RubyRiot::REFRESH_DATE || Time.at(val['revisionDate']/1000) < RubyRiot::LONG_REFRESH_DATE))  }[0][1] || self.class.by_name(id).to_hash
+				force ? self.class.by_name(id).to_hash : DB.select{|key,val| val['name'] =~ /#{id}/i && is_time_to_update? string: id}[0][1] || self.class.by_name(id).to_hash
 			else
 				fail "invalid identifier. Please supply an ID or summoner name"
 			end
+		end
+
+		def is_time_to_update?(opts={})
+			 ((val['summonerLevel'] == 30 || Time.at(val['revisionDate']/1000) < RubyRiot::refresh_date || Time.at(val['revisionDate']/1000) < RubyRiot::long_refresh_date))
 		end
 
 		def self.by_name(name)

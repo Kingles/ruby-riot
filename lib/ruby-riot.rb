@@ -5,17 +5,25 @@ require 'bundler/setup'
 require 'daybreak'
 require 'date'
 require 'time'
+require 'yaml'
 gem 'minitest' 
 require "httparty"
 
 
 module RubyRiot
-	REGION = 'na'
-	API_KEY = 'YOUR_API_KEY'
-	BASE_URI = "http://prod.api.pvp.net/api/lol/#{REGION}/" #not ssl for now..
-	DB = ::Daybreak::DB.new "../db/ruby-riot.db"
-	REFRESH_DATE = (Date.today - 7).to_time
-	LONG_REFRESH_DATE = (Date.today - 30).to_time
+	attr_accessor :region, :api_key, :base_uri, :db, :refresh_date, :long_refresh_date
+	@db = ::Daybreak::DB.new "../db/ruby-riot.db"
+
+	def config(opts={})
+		config = YAML.load('../config/API.yml')['config']
+		@region ||= config['region'] || opts[:region] || 'na'
+		@api_key ||= config['api_key'] || opts[:region] 
+		@base_uri ||= opts[:base_uri] || "http://prod.api.pvp.net/api/lol/#{REGION}/" #not ssl for now..
+		@refresh_date ||= (Date.today - 7).to_time
+		@long_refresh_date ||= (Date.today - 30).to_time
+	end
+	config
+	
 end
 
 require File.dirname(__FILE__) + '/ruby-riot/apimodel.rb'
