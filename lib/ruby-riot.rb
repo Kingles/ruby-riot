@@ -17,7 +17,7 @@ module RubyRiot
 	def config(opts={})
 		config = YAML.load('../config/API.yml')['config']
 		@region ||= config['region'] || opts[:region] || 'na'
-		@api_key ||= config['api_key'] || opts[:region] 
+		@api_key ||= config['api_key'] || opts[:api_key] 
 		@base_uri ||= opts[:base_uri] || "http://prod.api.pvp.net/api/lol/#{REGION}/" #not ssl for now..
 		@refresh_date ||= (Date.today - 7).to_time
 		@long_refresh_date ||= (Date.today - 30).to_time
